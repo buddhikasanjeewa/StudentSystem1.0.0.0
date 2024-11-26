@@ -27,6 +27,8 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		}
 		#endregion
 
+
+
 		#region Get Data
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<StudentPersonal>>> GetStudent() //Get Students All
