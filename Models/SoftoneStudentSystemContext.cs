@@ -10,6 +10,8 @@ public partial class SoftoneStudentSystemContext : DbContext
     {
     }
 
+
+
     public SoftoneStudentSystemContext(DbContextOptions<SoftoneStudentSystemContext> options)
         : base(options)
     {
