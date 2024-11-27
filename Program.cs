@@ -1,5 +1,10 @@
+using DataAccessLayer.Models;
+using DataAccessLayer.Repository.Classes;
+using DataAccessLayer.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using SoftOneStudentSystemWebApi.Models;
+using StudentBL;
+using StudentBL.Classes;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +15,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Add Context to Middlleware
+//Change Context to DAL Layer
 builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
+builder.Services.AddScoped<IStudentService,StudentService>();
+
+
+//builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
+//option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 
 var app = builder.Build();
 
