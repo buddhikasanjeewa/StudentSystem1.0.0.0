@@ -2,6 +2,7 @@ using DataAccessLayer.Models;
 using DataAccessLayer.Repository.Classes;
 using DataAccessLayer.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using SoftOneStudentSystemWebApi.RequestModel;
 using StudentBL;
 using StudentBL.Classes;
 
@@ -19,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 builder.Services.AddScoped<IStudentService,StudentService>();
-
+MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
 
 //builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 //option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
@@ -41,3 +42,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public static class MyOptions
+{
+	public static string ConnectionString { get; set; }
+}

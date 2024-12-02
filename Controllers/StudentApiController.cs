@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SoftOneStudentSystemWebApi.RequestModel;
 using StudentBL;
 using StudentBL.Classes;
+using StudentBL.RequestModel;
 using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SoftOneStudentSystemWebApi.Controllers
 {
@@ -25,7 +27,8 @@ namespace SoftOneStudentSystemWebApi.Controllers
 
 		//private readonly IStudentService _stuService;
 		private readonly IStudentService _stuService;
-		
+		private  int rtnValue;
+
 		#region Dependancy Injection
 		public StudentApiController(IStudentService  stuService)  //Add DbContext Via Dependancy Injection
         {
@@ -50,7 +53,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
         [HttpGet]
 		public async Task<IActionResult> GetStudents()
 		{
-			var data=await _stuService.GetStudentsAsync();
+			var data=await _stuService.GetStudentsAsync(MyOptions.ConnectionString);
 			return Ok(data);
 		}
 		//[HttpGet]
@@ -58,7 +61,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		//{
 		//	try
 		//	{
-			
+
 		//		return await this._stuService.GetStudentsAsync();
 		//		//return await dbContext.StudentPersonals.OrderBy(x=>x.StudentCode).ToListAsync();  //Return  list asyncronusly
 		//	}
@@ -68,6 +71,24 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		//	}
 		//}
 		#endregion
+		
+		#region Insert/Update Student
+		[HttpPost]      //Insert Student 
+		public async Task<IActionResult> PostStudent(StudentRequest StuRequest)
+		{
+			try
+			{
+				rtnValue = await this._stuService.PostStudentAsync(StuRequest);
+				return Ok(rtnValue);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+
+		}
+		#endregion
+
 
 
 		//[HttpGet("{Id:guid}/{StudentCode}")]
@@ -92,40 +113,6 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		//	}
 		//}
 		//#endregion
-		//#region Insert/Update Student
-		//[HttpPost]      //Insert Student 
-		//	public async Task<ActionResult<StudentBL.StudentPersonal>> PostStudent(StudentRequest StuRequest)
-		//	{
-		//		using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))  //Begin transaction
-		//		{
-		//			try
-		//			{
-		//			var domainModeStudent = new DataAccessLayer.Models.StudentPersonal
-		//			{
-		//				Id = Guid.NewGuid(),
-		//				StudentCode = StuRequest.StudentCode,
-		//				FirstName = StuRequest.FirstName,
-		//				LastName = StuRequest.LastName,
-		//				Mobile = StuRequest.Mobile,
-		//				Email = StuRequest.Email,
-		//				Nic=StuRequest.NIC,
-		//				Dob= StuRequest.Dob,
-		//				Address=StuRequest.Address
-		//			};
-
-		//			dbContext.StudentPersonals.Add(domainModeStudent);
-		//				await dbContext.SaveChangesAsync();
-		//				transaction.Commit();   //Commit  transaction
-		//			return Ok(domainModeStudent);
-		//			//return CreatedAtAction(nameof(GetStudent), new { Id = StuRequest.Id }, StuRequest); //Redirect to Student get method 
-		//		}
-		//			catch (Exception ex)
-		//			{
-		//				transaction.Rollback();  //Rollback transaction if any exeception 
-		//			throw new Exception(ex.Message);
-		//		}
-		//		}
-		//	}
 
 
 		//[HttpPut("{Id:guid}/{StudentCode}")]  
