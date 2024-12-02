@@ -78,7 +78,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		{
 			try
 			{
-				rtnValue = await this._stuService.PostStudentAsync(StuRequest);
+				rtnValue = await this._stuService.PostStudentAsync(StuRequest, MyOptions.ConnectionString);
 				return Ok(rtnValue);
 			}
 			catch (Exception ex)
