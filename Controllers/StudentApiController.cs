@@ -72,7 +72,9 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		#endregion
 		
 		#region Insert/Update Student
+
 		[HttpPost]      //Insert Student 
+		
 		public async Task<IActionResult> PostStudent(StudentRequest StuRequest)
 		{
 			try
