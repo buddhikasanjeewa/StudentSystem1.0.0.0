@@ -1,17 +1,13 @@
-﻿using Azure.Core;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository.Classes;
-using DataAccessLayer.Repository.Interfaces;
+﻿
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SoftOneStudentSystemWebApi.RequestModel;
+
 using StudentBL;
-using StudentBL.Classes;
+
 using StudentBL.RequestModel;
-using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using StudentSystemWebApi.Classes;
+
 
 namespace SoftOneStudentSystemWebApi.Controllers
 {
@@ -23,6 +19,8 @@ namespace SoftOneStudentSystemWebApi.Controllers
 	 */
     [Route("api/[controller]")]
 	[ApiController]
+	[Log]
+
 	public class StudentApiController : ControllerBase
 	{
 
