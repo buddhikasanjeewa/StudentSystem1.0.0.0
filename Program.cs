@@ -35,6 +35,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+	app.UseExceptionHandler("/error-development");
+}
+else
+{
+	app.UseExceptionHandler("/error");
+}
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();
