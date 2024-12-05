@@ -39,10 +39,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 
 
 		}
-        //public StudentApiController()
-        //{
-            
-        //}
+   
 
         #endregion
 
@@ -55,22 +52,16 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			var data=await _stuService.GetStudentsAsync(MyOptions.ConnectionString);
 			return Ok(data);
 		}
-		//[HttpGet]
-		//public async Task<ActionResult<List<StudentBL.Classes.StudentPersonal>>> GetStudentAsync() //Get Students All
-		//{
-		//	try
-		//	{
 
-		//		return await this._stuService.GetStudentsAsync();
-		//		//return await dbContext.StudentPersonals.OrderBy(x=>x.StudentCode).ToListAsync();  //Return  list asyncronusly
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return BadRequest(ex.Message);
-		//	}
-		//}
+		[HttpGet("{Id:guid}/{StudentCode}")]
+		public async Task<IActionResult> GetStudents(Guid Id, string StudentCode)
+		{
+			var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString,Id,StudentCode);
+			return Ok(data);
+		}
+
 		#endregion
-		
+
 		#region Insert/Update Student
 
 		[HttpPost]      //Insert Student 
