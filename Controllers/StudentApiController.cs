@@ -7,6 +7,7 @@ using StudentBL;
 
 using StudentBL.RequestModel;
 using StudentSystemWebApi.Classes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace SoftOneStudentSystemWebApi.Controllers
@@ -56,8 +57,20 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		[HttpGet("{Id:guid}/{StudentCode}")]
 		public async Task<IActionResult> GetStudents(Guid Id, string StudentCode)
 		{
-			var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString,Id,StudentCode);
-			return Ok(data);
+			try
+			{
+				
+			   var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString, Id, StudentCode);
+				if (data == null)
+				{
+					return NotFound();
+				}
+				return Ok(data);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 
 		#endregion
@@ -89,6 +102,10 @@ namespace SoftOneStudentSystemWebApi.Controllers
 					return BadRequest();
 				}
 				rtnValue = await this._stuService.PostStudentAsync(StuRequest, MyOptions.ConnectionString);
+				if(rtnValue==0)
+				{
+					return BadRequest();
+				}
 				return Ok(rtnValue);
 			}
 			catch (Exception ex)
@@ -99,7 +116,26 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		}
 
 		#endregion
-		#region ErrorHandl
+		#region Delete Student
+		[HttpDelete("{Id:guid}/{StudentCode}")]
+		public async Task<ActionResult> DeleteStudent(Guid Id, string StudentCode)
+		{
+		   try
+			{
+				rtnValue= await this._stuService.DeleteStudentAsync(Id, StudentCode, MyOptions.ConnectionString);
+				if(rtnValue==0)
+				{
+					return NotFound();
+				}
+				return Ok(rtnValue);
+			}
+	    	catch(Exception ex) {
+			throw new Exception(ex.Message);
+		}    
+		}
+		#endregion
+
+			#region ErrorHandl
 		[ApiExplorerSettings(IgnoreApi = true)]
 		[Route("/error-development")]
 		public IActionResult HandleErrorDevelopment(
