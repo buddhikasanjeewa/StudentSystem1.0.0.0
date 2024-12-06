@@ -12,12 +12,12 @@ using StudentSystemWebApi.Classes;
 namespace SoftOneStudentSystemWebApi.Controllers
 {
 
-    /*
+	/*
 	 *Author:Buddhika Walpita 
 	 * Date:2024-11-12
 	 * Description:CRUD Operations in Api
 	 */
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
 	[ApiController]
 	[Log]
 
@@ -79,6 +79,25 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			}
 
 		}
+		[HttpPut("{Id:guid}/{StudentCode}")]
+		public async Task<IActionResult> UpdateStudent(Guid Id, string StudentCode, StudentRequest StuRequest)
+		{
+			try
+			{
+				if (Id != StuRequest.Id)
+				{
+					return BadRequest();
+				}
+				rtnValue = await this._stuService.PostStudentAsync(StuRequest, MyOptions.ConnectionString);
+				return Ok(rtnValue);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+
+		}
+
 		#endregion
 		#region ErrorHandl
 		[ApiExplorerSettings(IgnoreApi = true)]
@@ -99,73 +118,13 @@ namespace SoftOneStudentSystemWebApi.Controllers
 				title: exceptionHandlerFeature.Error.Message);
 		}
 		#endregion
-		//[HttpGet("{Id:guid}/{StudentCode}")]
-		//public async Task<ActionResult<StudentBL.StudentPersonal>> GetStudents(Guid Id,string StudentCode)  //Get Students via Identififier
-		//{
-		//	try
-		//	{
-		//		if (dbContext.StudentPersonals == null)
-		//		{
-		//			return NotFound();
-		//		}
-		//		var emp = await dbContext.StudentPersonals.FindAsync(Id,StudentCode);  //check with Student Id
-		//		if (emp == null)
-		//		{
-		//			return NotFound();
-		//		}
-		//		return emp;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return BadRequest(ex.Message);
-		//	}
-		//}
-		//#endregion
+		
 
-
-		//[HttpPut("{Id:guid}/{StudentCode}")]  
-		//public async Task<ActionResult<StudentBL.StudentPersonal>> UpdateStudent(Guid Id, string StudentCode, StudentRequest StuRequest)  //Update Students
-		//{
-		//	if (Id != StuRequest.Id)
-		//	{
-		//		return BadRequest();
-		//	}
-		//	using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
-		//	{
-		//		//dbContext.Entry(StudentRequest).State = EntityState.Modified;
-		//		try
-		//		{
-
-		//			var stu = await dbContext.StudentPersonals.FindAsync(Id, StudentCode);
-		//			if(stu!=null)
-		//			{
-		//				stu.FirstName = StuRequest.FirstName;
-		//				stu.LastName = StuRequest.LastName;
-		//				stu.StudentCode = StuRequest.StudentCode;
-		//				stu.Email = StuRequest.Email;
-		//				stu.Mobile = StuRequest.Mobile;
-		//				stu.Nic = StuRequest.NIC;
-		//				stu.Address = StuRequest.Address;
-		//				stu.Dob= StuRequest.Dob;
+		
 
 
 
-		//			}
-		//			await dbContext.SaveChangesAsync();
-		//			transaction.Commit();
-		//			return CreatedAtAction(nameof(GetStudent), new { Id = StuRequest.Id }, StuRequest);
-
-		//		}
-		//		catch (DbUpdateConcurrencyException ex)
-		//		{
-		//			transaction.Rollback();
-		//			throw new Exception(ex.Message);
-		//		}
-		//	}
-
-		//}
-
-		//#endregion
+	
 
 		//#region DeleteStudent
 		//[HttpDelete("{Id:guid}/{StudentCode}")]
