@@ -1,5 +1,11 @@
+using DataAccessLayer.Models;
+using DataAccessLayer.Repository.Classes;
+using DataAccessLayer.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using SoftOneStudentSystemWebApi.Models;
+using SoftOneStudentSystemWebApi.RequestModel;
+using StudentBL;
+using StudentBL.Classes;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Add Context to Middlleware
+//Change Context to DAL Layer
 builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
+builder.Services.AddScoped<IStudentService,StudentService>();
+MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
+
+//builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
+//option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 
 var app = builder.Build();
 
@@ -23,6 +35,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+	app.UseExceptionHandler("/error-development");
+}
+else
+{
+	app.UseExceptionHandler("/error");
+}
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();
@@ -30,3 +50,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public static class MyOptions
+{
+	public static string ConnectionString { get; set; }
+}
