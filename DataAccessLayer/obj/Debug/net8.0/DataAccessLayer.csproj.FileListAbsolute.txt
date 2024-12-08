@@ -1,0 +1,28 @@
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.deps.json
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.runtimeconfig.json
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.dll
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.pdb
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfo.cs
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.dll
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\refint\DataAccessLayer.dll
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.pdb
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.genruntimeconfig.cache
+C:\SoftOneStudentSystem1.0.0.0 - Microservice\Softone Assignment  with Filter\API\DataAccessLayer\obj\Debug\net8.0\ref\DataAccessLayer.dll
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfo.cs
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.deps.json
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.runtimeconfig.json
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.dll
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.pdb
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.dll
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\refint\DataAccessLayer.dll
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.pdb
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.genruntimeconfig.cache
+C:\SampleStudentSystem1.0.0.0\StudentAssignment\API\DataAccessLayer\obj\Debug\net8.0\ref\DataAccessLayer.dll

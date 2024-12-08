@@ -1,0 +1,12 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "StuConStr": "Server=LAPTOP-2OTFH16P\\SQLEXPRESS;Database=SoftoneStudentSystem;User Id=sa;password=123;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+  },
+  "AllowedHosts": "*"
+}
