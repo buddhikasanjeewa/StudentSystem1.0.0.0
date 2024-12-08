@@ -155,36 +155,5 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		}
 		#endregion
 		
-
-		
-
-
-
-	
-
-		//#region DeleteStudent
-		//[HttpDelete("{Id:guid}/{StudentCode}")]
-		//public async Task<ActionResult> DeleteStudent(Guid Id, string StudentCode)  //Delete Student
-		//{
-		//	try
-		//	{
-		//		if (dbContext.StudentPersonals == null)
-		//		{
-		//			return NotFound();
-		//		}
-		//		var stu = await dbContext.StudentPersonals.FindAsync(Id,StudentCode);
-		//		if (stu == null)
-		//		{
-		//			return NotFound();
-		//		}
-		//		dbContext.StudentPersonals.Remove(stu);  //Remove the student 
-		//		await dbContext.SaveChangesAsync(); //Update the database
-		//		return Ok();
-		//	}
-		//	catch(Exception ex) {
-		//		throw new Exception(ex.Message);
-		//	}
-		//}
-		//#endregion
 	}
 }
