@@ -116,7 +116,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 				NIC = stuRequest.NIC,
 			};
 
-			return await this.iStuRepo.PostStudents(stuReq, ConnectionString);
+			return await this.iStuRepo.PostStudents(Id,StudentCode,stuReq, ConnectionString);
 		}
 	}
 }

@@ -101,7 +101,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 				{
 					return BadRequest();
 				}
-				rtnValue = await this._stuService.PostStudentAsync(StuRequest, MyOptions.ConnectionString);
+				rtnValue = await this._stuService.PostStudentAsync(Id,StudentCode,StuRequest, MyOptions.ConnectionString);
 				if(rtnValue==0)
 				{
 					return BadRequest();
