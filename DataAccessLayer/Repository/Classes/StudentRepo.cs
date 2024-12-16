@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Models;
 using DataAccessLayer.Repository.Interfaces;
 using DataAccessLayer.RequestModel;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,13 @@ namespace DataAccessLayer.Repository.Classes
 				throw new Exception("Not Found");
 			}
 			this.dbContext.ConnectionString=constr;
-			return await dbContext.StudentPersonals.ToListAsync();
+			var paramSearchCri = new SqlParameter("@SeachCriteria", "");
+			var paramType = new SqlParameter("@type", 1);
+			var students = this.dbContext.StudentPersonals
+					  .FromSqlRaw("Get_StudentData @SeachCriteria,@type", paramSearchCri, paramType)
+					  .ToList();
+			return students;
+			//	return await dbContext.StudentPersonals.ToListAsync();
 		}
 		public async Task<List<StudentPersonal>> GetStudents(string constr,  Guid Id, string StudentCode)
 		{
