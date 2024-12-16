@@ -20,9 +20,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\StudentBL\StudentBL.csproj" />
-  </ItemGroup>
+ 
 
 </Project>
