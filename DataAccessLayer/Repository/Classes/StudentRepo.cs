@@ -40,6 +40,28 @@ namespace DataAccessLayer.Repository.Classes
 			return students;
 			//	return await dbContext.StudentPersonals.ToListAsync();
 		}
+
+		public async Task<List<StudentPersonal>> GetStudents(string constr, Guid Id, string StudentCode)
+		{
+			try
+			{
+				Initalize(constr);
+				var result = dbContext.StudentPersonals.Where(x => x.Id == Id && x.StudentCode == StudentCode);
+				if (result.Any())
+				{
+					return await result.ToListAsync();
+				}
+				else
+				{
+					throw new Exception("No data found");
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+
 		public async Task<List<StudentPersonal>> GetStudents(string constr, string searchCriteria)
 		{
 			try

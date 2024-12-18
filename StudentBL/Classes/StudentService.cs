@@ -58,6 +58,31 @@ namespace SoftOneStudentSystemWebApi.RequestModel
             return stuList;
         }
 
+		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id, string StudentCode)
+		{
+			var result = await this.iStuRepo.GetStudents(ConnectionString, Id, StudentCode);
+			List<StudentBL.Classes.StudentPersonal> stuList = new List<StudentBL.Classes.StudentPersonal>();
+			foreach (var item in result)
+			{
+				var stuPer = new StudentBL.Classes.StudentPersonal()
+				{
+					Id = item.Id,
+					FirstName = item.FirstName,
+					LastName = item.LastName,
+					StudentCode = item.StudentCode,
+					Address = item.Address,
+					Email = item.Email,
+					Mobile = item.Mobile,
+					NIC = item.Nic,
+					Dob = item.Dob,
+
+				};
+				stuList.Add(stuPer);
+
+			}
+			return stuList;
+		}
+
 		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, string SearchCriteria)
 		{
 			var result = await this.iStuRepo.GetStudents(ConnectionString, SearchCriteria);
