@@ -13,8 +13,9 @@ namespace DataAccessLayer.Repository.Interfaces
 
     
         public Task<List<StudentPersonal>> GetStudents(string constr);
-		public Task<List<StudentPersonal>> GetStudents(string constr, Guid Id, string StudentCode);
-        
+		public Task<List<StudentPersonal>> GetStudents(string constr, string searchCriteria);
+
+
 
 		public Task<int> PostStudents(StudentRequest StuRequest, string constr);
 		public Task<int> PostStudents(Guid Id, string StudentCode,StudentRequest StuRequest, string constr);
