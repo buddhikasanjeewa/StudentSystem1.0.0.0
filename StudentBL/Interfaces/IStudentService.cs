@@ -16,7 +16,9 @@ namespace StudentBL
 		////void GetStudentWithId(int id);
 
 		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString);
-		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id, string StudentCode);
+		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, string SearchCriteria);
+
+
 		Task<int> PostStudentAsync(StudentRequest stuRequest, string ConnectionString);
 
 		Task<int> PostStudentAsync(Guid Id, string StudentCode, StudentRequest stuRequest, string ConnectionString);

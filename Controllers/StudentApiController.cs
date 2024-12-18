@@ -54,13 +54,13 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			return Ok(data);
 		}
 
-		[HttpGet("{Id:guid}/{StudentCode}")]
-		public async Task<IActionResult> GetStudents(Guid Id, string StudentCode)
+		[HttpGet("{SearchCriteria}")]
+		public async Task<IActionResult> GetStudents(string SearchCriteria)
 		{
 			try
 			{
 				
-			   var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString, Id, StudentCode);
+			   var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString,SearchCriteria);
 				if (data == null)
 				{
 					return NotFound();
