@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DataAccessLayer.Repository.Classes
 {
@@ -50,7 +52,7 @@ namespace DataAccessLayer.Repository.Classes
 				var paramSearchCri = new SqlParameter("@SeachCriteria",searchCriteria );
 				var paramType = new SqlParameter("@type", 3);
 				var result = await this.dbContext.StudentPersonals
-						  .FromSqlRaw("Get_StudentData @SeachCriteria,@type", paramSearchCri, paramType).ToListAsync();
+						   .FromSqlRaw("Get_StudentData @SeachCriteria,@type", paramSearchCri, paramType).ToListAsync();
 
 
 				if (result.Any())
@@ -80,21 +82,50 @@ namespace DataAccessLayer.Repository.Classes
 			{
 				try
 				{
-					var domainModeStudent = new DataAccessLayer.Models.StudentPersonal
+					//var domainModeStudent = new StudentPersonal
+					//{
+					//	Id = Guid.NewGuid(),
+					//	StudentCode = StuRequest.StudentCode,
+					//	FirstName = StuRequest.FirstName,
+					//	LastName = StuRequest.LastName,
+					//	Mobile = StuRequest.Mobile,
+					//	Email = StuRequest.Email,
+					//	Nic = StuRequest.NIC,
+					//	Dob = StuRequest.Dob,
+					//	Address = StuRequest.Address
+					//};
+					var paramList = new List<SqlParameter>()
 					{
-						Id = Guid.NewGuid(),
-						StudentCode = StuRequest.StudentCode,
-						FirstName = StuRequest.FirstName,
-						LastName = StuRequest.LastName,
-						Mobile = StuRequest.Mobile,
-						Email = StuRequest.Email,
-						Nic = StuRequest.NIC,
-						Dob = StuRequest.Dob,
-						Address = StuRequest.Address
+					   new SqlParameter("@Id", Guid.NewGuid()),
+					   new SqlParameter("@StudentCode", StuRequest.StudentCode),
+					   new SqlParameter("@FirstName", StuRequest.FirstName),
+					   new SqlParameter("@LastName", StuRequest.LastName),
+					   new SqlParameter("@Address", StuRequest.Address),
+					   new SqlParameter("@mobile", StuRequest.Mobile),
+					   new SqlParameter("@email", StuRequest.Email),
+					   new SqlParameter("@DOB",StuRequest.Dob),
+					   new SqlParameter("@NIC", StuRequest.NIC)
+					
 					};
+					//paramList[7].Value = StuRequest.Dob.Value.ToShortDateString();
+					//var paramGuid = new SqlParameter("@Id", Guid.NewGuid());
+					//var paramStuCode = new SqlParameter("@StudentCode", StuRequest.StudentCode);
+					//var paramFName = new SqlParameter("@FirstName", StuRequest.FirstName);
+					//var paramLName = new SqlParameter("@LastName", StuRequest.LastName);
+					//var paramAdd = new SqlParameter("@Address", StuRequest.Address);
+					//var paramMobile = new SqlParameter("@mobile", StuRequest.Mobile);
+					//var paramEmail = new SqlParameter("@email", StuRequest.Email);
+					//var paramDob = new SqlParameter("@DOB", StuRequest.Dob);
+					//var paramType = new SqlParameter("@NIC", StuRequest.NIC);
 
-					dbContext.StudentPersonals.Add(domainModeStudent);
-					await dbContext.SaveChangesAsync();
+					//var result = await Task.Run(() => _dbContext.Database
+				 //  .ExecuteSqlRawAsync(@"exec AddNewProduct @ProductName, @ProductDescription, @ProductPrice, @ProductStock", parameter.ToArray()));
+
+					var result = await Task.Run(() => dbContext.Database
+										   .ExecuteSqlRawAsync(@"exec Save_Student @Id,@StudentCode,@FirstName,@LastName,@Address,@mobile,@email,@DOB,@NIC", paramList.ToArray()));
+
+					//	dbContext.StudentPersonals.Add(domainModeStudent);
+					//await dbContext.SaveChangesAsync();
 					transaction.Commit();   //Commit  transaction
 					retunVal = 1;
 					return retunVal;
