@@ -1,10 +1,8 @@
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository.Classes;
-using DataAccessLayer.Repository.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
 using SoftOneStudentSystemWebApi.RequestModel;
 using StudentBL;
-using StudentBL.Classes;
+using StudentSystemWebApi;
 
 
 var builder = WebApplication.CreateBuilder(args);

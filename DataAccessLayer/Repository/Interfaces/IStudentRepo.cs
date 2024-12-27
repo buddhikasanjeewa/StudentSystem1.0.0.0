@@ -1,10 +1,7 @@
-﻿using DataAccessLayer.Models;
+﻿
 using DataAccessLayer.RequestModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentSystemWebApi.DataAccessLayer.Models;
+
 
 namespace DataAccessLayer.Repository.Interfaces
 {
@@ -15,11 +12,11 @@ namespace DataAccessLayer.Repository.Interfaces
         public Task<List<StudentPersonal>> GetStudents(string constr);
 		public Task<List<StudentPersonal>> GetStudents(string constr, string searchCriteria);
 
-		public Task<List<StudentPersonal>> GetStudents(string constr, Guid Id, string StudentCode);
+		public Task<List<StudentPersonal>> GetStudents(string constr, Guid Id);
 
 		public Task<int> PostStudents(StudentRequest StuRequest, string constr);
-		public Task<int> PostStudents(Guid Id, string StudentCode,StudentRequest StuRequest, string constr);
-		public Task<int> DeleteStudent(Guid Id, string StudentCode ,string constr);
+		public Task<int> PostStudents(Guid Id,StudentRequest StuRequest, string constr);
+		public Task<int> DeleteStudent(Guid Id ,string constr);
 
 	}
 }

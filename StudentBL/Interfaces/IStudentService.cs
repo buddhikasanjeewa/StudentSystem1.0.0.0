@@ -18,12 +18,12 @@ namespace StudentBL
 		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString);
 		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, string SearchCriteria);
 
-		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id, string StudentCode);
+		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id);
 		Task<int> PostStudentAsync(StudentRequest stuRequest, string ConnectionString);
 
-		Task<int> PostStudentAsync(Guid Id, string StudentCode, StudentRequest stuRequest, string ConnectionString);
+		Task<int> PostStudentAsync(Guid Id, StudentRequest stuRequest, string ConnectionString);
 
-		public Task<int> DeleteStudentAsync(Guid Id, string StudentCode, string ConnectionString);
+		public Task<int> DeleteStudentAsync(Guid Id, string ConnectionString);
 
 
 

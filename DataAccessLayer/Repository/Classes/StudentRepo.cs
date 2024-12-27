@@ -1,15 +1,10 @@
-﻿using DataAccessLayer.Models;
+﻿
 using DataAccessLayer.Repository.Interfaces;
 using DataAccessLayer.RequestModel;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using StudentSystemWebApi;
+using StudentSystemWebApi.DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repository.Classes
 {
@@ -43,12 +38,12 @@ namespace DataAccessLayer.Repository.Classes
 			//	return await dbContext.StudentPersonals.ToListAsync();
 		}
 
-		public async Task<List<StudentPersonal>> GetStudents(string constr, Guid Id, string StudentCode)
+		public async Task<List<StudentPersonal>> GetStudents(string constr, Guid Id)
 		{
 			try
 			{
 				Initalize(constr);
-				var result = dbContext.StudentPersonals.Where(x => x.Id == Id && x.StudentCode == StudentCode);
+				var result = dbContext.StudentPersonals.Where(x => x.Uid == Id );
 				if (result.Any())
 				{
 					return await result.ToListAsync();
@@ -162,7 +157,7 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		public async Task<int> PostStudents(Guid Id, string StudentCode, StudentRequest StuRequest, string constr)
+		public async Task<int> PostStudents(Guid Id, StudentRequest StuRequest, string constr)
 		{
 
 			Initalize(constr);
@@ -171,7 +166,7 @@ namespace DataAccessLayer.Repository.Classes
 				try
 				{
 
-					var stu = await dbContext.StudentPersonals.FindAsync(Id, StudentCode);
+					var stu = await dbContext.StudentPersonals.FindAsync(Id);
 					if (stu != null)
 					{
 						stu.FirstName = StuRequest.FirstName;
@@ -199,12 +194,12 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		public async Task<int> DeleteStudent(Guid Id, string StudentCode, string constr)
+		public async Task<int> DeleteStudent(Guid Id, string constr)
 		{
 			try
 			{
 				Initalize(constr);
-				var stu = await dbContext.StudentPersonals.FindAsync(Id, StudentCode);
+				var stu = await dbContext.StudentPersonals.FindAsync(Id);
 			
 				dbContext.StudentPersonals.Remove(stu);  //Remove the student 
 				await dbContext.SaveChangesAsync(); //Update the database
