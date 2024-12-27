@@ -1,19 +1,8 @@
-﻿using Azure.Core;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository.Classes;
+﻿using DataAccessLayer.Repository.Classes;
 using DataAccessLayer.Repository.Interfaces;
-using DataAccessLayer.RequestModel;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using StudentBL;
-using StudentBL.Classes;
-using StudentBL.RequestModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using StudentSystemWebApi;
+
 
 namespace SoftOneStudentSystemWebApi.RequestModel
 {
@@ -29,9 +18,9 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 			
 		}
 
-		public async Task<int> DeleteStudentAsync(Guid Id, string StudentCode, string ConnectionString)
+		public async Task<int> DeleteStudentAsync(Guid Id, string ConnectionString)
 		{
-			return await this.iStuRepo.DeleteStudent(Id,StudentCode, ConnectionString);
+			return await this.iStuRepo.DeleteStudent(Id, ConnectionString);
 		}
 
 		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString)
@@ -41,7 +30,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
             foreach (var item in result) {
                 var stuPer = new StudentBL.Classes.StudentPersonal()
                 {
-					Id=item.Id,
+					Id=item.Uid,
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     StudentCode = item.StudentCode,
@@ -58,15 +47,15 @@ namespace SoftOneStudentSystemWebApi.RequestModel
             return stuList;
         }
 
-		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id, string StudentCode)
+		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id)
 		{
-			var result = await this.iStuRepo.GetStudents(ConnectionString, Id, StudentCode);
+			var result = await this.iStuRepo.GetStudents(ConnectionString, Id);
 			List<StudentBL.Classes.StudentPersonal> stuList = new List<StudentBL.Classes.StudentPersonal>();
 			foreach (var item in result)
 			{
 				var stuPer = new StudentBL.Classes.StudentPersonal()
 				{
-					Id = item.Id,
+					Id = item.Uid,
 					FirstName = item.FirstName,
 					LastName = item.LastName,
 					StudentCode = item.StudentCode,
@@ -91,7 +80,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 			{
 				var stuPer = new StudentBL.Classes.StudentPersonal()
 				{
-					Id = item.Id,
+					Id = item.Uid,
 					FirstName = item.FirstName,
 					LastName = item.LastName,
 					StudentCode = item.StudentCode,
@@ -127,7 +116,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 
 		}
 
-		public async Task<int> PostStudentAsync(Guid Id, string StudentCode, StudentBL.RequestModel.StudentRequest stuRequest, string ConnectionString)
+		public async Task<int> PostStudentAsync(Guid Id, StudentBL.RequestModel.StudentRequest stuRequest, string ConnectionString)
 		{
 			var stuReq = new DataAccessLayer.RequestModel.StudentRequest()
 			{
@@ -141,7 +130,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 				NIC = stuRequest.NIC,
 			};
 
-			return await this.iStuRepo.PostStudents(Id,StudentCode,stuReq, ConnectionString);
+			return await this.iStuRepo.PostStudents(Id,stuReq, ConnectionString);
 		}
 	}
 }

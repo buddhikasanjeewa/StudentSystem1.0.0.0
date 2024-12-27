@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 
-namespace DataAccessLayer.Models;
+namespace StudentSystemWebApi.DataAccessLayer.Models;
 
 public partial class StudentPersonal
 {
-    public Guid Id { get; set; }
+    public Guid Uid { get; set; }
 
     public string StudentCode { get; set; } = null!;
 
@@ -22,4 +21,6 @@ public partial class StudentPersonal
     public DateTime? Dob { get; set; }
 
     public string Nic { get; set; } = null!;
+
+    public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
 }

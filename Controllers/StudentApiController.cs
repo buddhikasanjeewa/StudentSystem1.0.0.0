@@ -54,13 +54,13 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			return Ok(data);
 		}
 
-		[HttpGet("{Id:guid}/{StudentCode}")]
-		public async Task<IActionResult> GetStudents(Guid Id, string StudentCode)
+		[HttpGet("{Id:guid}")]
+		public async Task<IActionResult> GetStudents(Guid Id)
 		{
 			try
 			{
 
-				var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString, Id, StudentCode);
+				var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString, Id);
 				if (data == null)
 				{
 					return NotFound();
@@ -111,8 +111,8 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			}
 
 		}
-		[HttpPut("{Id:guid}/{StudentCode}")]
-		public async Task<IActionResult> UpdateStudent(Guid Id, string StudentCode, StudentRequest StuRequest)
+		[HttpPut("{Id:guid}")]
+		public async Task<IActionResult> UpdateStudent(Guid Id, StudentRequest StuRequest)
 		{
 			try
 			{
@@ -120,7 +120,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 				{
 					return BadRequest();
 				}
-				rtnValue = await this._stuService.PostStudentAsync(Id,StudentCode,StuRequest, MyOptions.ConnectionString);
+				rtnValue = await this._stuService.PostStudentAsync(Id,StuRequest, MyOptions.ConnectionString);
 				if(rtnValue==0)
 				{
 					return BadRequest();
@@ -136,12 +136,12 @@ namespace SoftOneStudentSystemWebApi.Controllers
 
 		#endregion
 		#region Delete Student
-		[HttpDelete("{Id:guid}/{StudentCode}")]
-		public async Task<ActionResult> DeleteStudent(Guid Id, string StudentCode)
+		[HttpDelete("{Id:guid}")]
+		public async Task<ActionResult> DeleteStudent(Guid Id)
 		{
 		   try
 			{
-				rtnValue= await this._stuService.DeleteStudentAsync(Id, StudentCode, MyOptions.ConnectionString);
+				rtnValue= await this._stuService.DeleteStudentAsync(Id, MyOptions.ConnectionString);
 				if(rtnValue==0)
 				{
 					return NotFound();
