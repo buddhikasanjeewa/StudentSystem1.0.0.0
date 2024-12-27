@@ -1,0 +1,1 @@
+EXEC sp_rename 'dbo.Student_Personal.Id', 'UID', 'COLUMN';

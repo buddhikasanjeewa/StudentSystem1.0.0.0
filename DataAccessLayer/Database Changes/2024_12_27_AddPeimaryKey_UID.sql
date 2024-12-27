@@ -1,0 +1,2 @@
+ALTER TABLE Student_Personal
+ADD CONSTRAINT PK_Student_Personal PRIMARY KEY (UID);
