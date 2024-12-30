@@ -7,10 +7,10 @@ namespace StudentSystemWebApi.DataAccessLayer.RequestModel
         [Key]
         public Guid Id { get; set; }
 
-        public string  CourseCode { get; set; }
+        public required string  CourseCode { get; set; }
 
         public Guid  CourseTypeUID { get; set; }
-        public string CourseDescription { get; set; }
+        public required string CourseDescription { get; set; }
 
         
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using SoftOneStudentSystemWebApi.RequestModel;
 using StudentBL;
 using StudentSystemWebApi;
+using StudentSystemWebApi.StudentBL.Classes;
+using StudentSystemWebApi.StudentBL.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 builder.Services.AddScoped<IStudentService,StudentService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
 
 //builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>

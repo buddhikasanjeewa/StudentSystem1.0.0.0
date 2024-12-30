@@ -27,9 +27,5 @@ namespace StudentBL
 
 
 
-		//void GetStudentsWithSearch(string serachCriteria);
-
-		//void PostStudent(StudentRequest stuRequest);
-		//void DeleteStudent(int id);
 	}
 }

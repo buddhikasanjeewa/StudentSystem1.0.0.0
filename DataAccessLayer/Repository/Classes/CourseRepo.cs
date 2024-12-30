@@ -76,7 +76,26 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
             return courses;
         }
 
-  
+        public async Task<List<Course>> GetCourses(string constr, Guid Id)
+        {
+            try
+            {
+                Initalize(constr);
+                var result = dbContext.Courses.Where(x => x.Uid == Id);
+                if (result.Any())
+                {
+                    return await result.ToListAsync();
+                }
+                else
+                {
+                    throw new Exception("No data found");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public async Task<int> PostCourses(CourseRequest CouRequest, string constr)
         {
             Initalize(constr);
@@ -89,7 +108,7 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
                        new SqlParameter("@UID", Guid.NewGuid()),
                        new SqlParameter("@Course_Code", CouRequest.CourseCode),
                        new SqlParameter("@Course_Type_UID",CouRequest.CourseTypeUID),
-                       new SqlParameter("@Course_Description", CouRequest.CourseTypeUID),
+                       new SqlParameter("@Course_Description", CouRequest.CourseDescription),
            
 
                     };
