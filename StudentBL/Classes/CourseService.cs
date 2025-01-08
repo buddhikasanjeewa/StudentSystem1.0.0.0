@@ -15,7 +15,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
         public CourseService()
         {
 
-            this.iCouRepo = new CourseRepo(new SoftoneStudentSystemContext());
+            this.iCouRepo = new CourseRepo(new GitstudentContext());
 
         }
         public async Task<int> DeleteCourseAsync(Guid Id, string ConnectionString)
