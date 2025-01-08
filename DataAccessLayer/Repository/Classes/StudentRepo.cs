@@ -67,7 +67,7 @@ namespace DataAccessLayer.Repository.Classes
 				//var result = dbContext.StudentPersonals.Where(x => x.Id == Id && x.StudentCode == StudentCode);
 
 				var paramSearchCri = new SqlParameter("@SeachCriteria",searchCriteria );
-				var paramType = new SqlParameter("@type", 3);
+				var paramType = new SqlParameter("@type", 2);
 				var result = await this.dbContext.StudentPersonals
 						   .FromSqlRaw("Get_StudentData @SeachCriteria,@type", paramSearchCri, paramType).ToListAsync();
 
