@@ -14,11 +14,11 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
         }
 
 
-        private readonly SoftoneStudentSystemContext dbContext;
+        private readonly GitstudentContext dbContext;
         public string ConnectionString { get; set; }
 
         private int retunVal;
-        public CourseRepo(SoftoneStudentSystemContext dbContext)
+        public CourseRepo(GitstudentContext dbContext)
         {
             this.dbContext = dbContext;
         }
