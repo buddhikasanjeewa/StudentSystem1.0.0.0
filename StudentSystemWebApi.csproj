@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataAccessLayer\Models\SoftoneStudentSystemContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="DataAccessLayer\appconfig.json" />
   </ItemGroup>
 

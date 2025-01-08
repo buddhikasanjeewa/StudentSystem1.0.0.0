@@ -2,6 +2,7 @@
 using DataAccessLayer.Repository.Interfaces;
 using StudentBL;
 using StudentSystemWebApi;
+using StudentSystemWebApi.DataAccessLayer.Models;
 
 
 namespace SoftOneStudentSystemWebApi.RequestModel
@@ -14,7 +15,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 		public StudentService()
 		{
 			
-			this.iStuRepo = new StudentRepo(new SoftoneStudentSystemContext());
+			this.iStuRepo = new StudentRepo(new GitstudentContext());
 			
 		}
 

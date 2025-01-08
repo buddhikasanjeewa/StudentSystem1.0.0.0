@@ -10,11 +10,11 @@ namespace DataAccessLayer.Repository.Classes
 {
 	public class StudentRepo : IStudentRepo
 	{
-		private readonly SoftoneStudentSystemContext dbContext;
-		public string ConnectionString { get; set; }
+		private readonly GitstudentContext dbContext;
+        public string ConnectionString { get; set; }
 
 		private int retunVal;
-		public StudentRepo(SoftoneStudentSystemContext dbContext)
+		public StudentRepo(GitstudentContext dbContext)
 		{
 			this.dbContext = dbContext;  
 		}
