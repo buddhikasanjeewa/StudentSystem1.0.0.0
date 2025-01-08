@@ -18,15 +18,15 @@ namespace StudentSystemWebApi.StudentBL.Classes
             this.iCouRepo = new CourseRepo(new GitstudentContext());
 
         }
-        public async Task<int> DeleteCourseAsync(Guid Id, string ConnectionString)
+        public async Task<int> DeleteCourseAsync(Guid Id)
         {
-            return await this.iCouRepo.DeleteCourses(Id, ConnectionString);
+            return await this.iCouRepo.DeleteCourses(Id);
         }
 
 
-       public async Task<List<Course>> GetCourseAsync(string ConnectionString)
+       public async Task<List<Course>> GetCourseAsync()
         {
-            var result = await this.iCouRepo.GetCourses(ConnectionString);
+            var result = await this.iCouRepo.GetCourses();
             List<StudentBL.Classes.Course> couList = new List<StudentBL.Classes.Course>();
             foreach (var item in result)
             {
@@ -44,9 +44,9 @@ namespace StudentSystemWebApi.StudentBL.Classes
             }
             return couList;
         }
-        public async Task<List<Course>> GetCourseAsync(string ConnectionString, Guid Id)
+        public async Task<List<Course>> GetCourseAsync(Guid Id)
         {
-            var result = await this.iCouRepo.GetCourses(ConnectionString,Id);
+            var result = await this.iCouRepo.GetCourses(Id);
             List<StudentBL.Classes.Course> couList = new List<StudentBL.Classes.Course>();
             foreach (var item in result)
             {
@@ -67,9 +67,9 @@ namespace StudentSystemWebApi.StudentBL.Classes
 
       
 
-        public async Task<List<Course>> GetCourseAsync(string ConnectionString, string SearchCriteria)
+        public async Task<List<Course>> GetCourseAsync(string SearchCriteria)
         {
-            var result = await this.iCouRepo.GetCourses(ConnectionString, SearchCriteria);
+            var result = await this.iCouRepo.GetCourses(SearchCriteria);
             List<StudentBL.Classes.Course> couList = new List<StudentBL.Classes.Course>();
             foreach (var item in result)
             {
@@ -89,7 +89,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
 
       
 
-        public async Task<int> PostCourseAsync(CourseRequest couRequest, string ConnectionString)
+        public async Task<int> PostCourseAsync(CourseRequest couRequest)
         {
             var couReq = new DataAccessLayer.RequestModel.CourseRequest()
             {
@@ -100,10 +100,10 @@ namespace StudentSystemWebApi.StudentBL.Classes
                 CourseDescription = couRequest.CourseDescription,
             };
 
-            return await this.iCouRepo.PostCourses(couReq, ConnectionString);
+            return await this.iCouRepo.PostCourses(couReq);
         }
 
-        public async Task<int> PostCourseAsync(Guid Id, CourseRequest couRequest, string ConnectionString)
+        public async Task<int> PostCourseAsync(Guid Id, CourseRequest couRequest)
         {
             var couReq = new DataAccessLayer.RequestModel.CourseRequest()
             {
@@ -113,7 +113,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
                 CourseDescription = couRequest.CourseDescription,
             };
 
-            return await this.iCouRepo.PostCourses(Id, couReq, ConnectionString);
+            return await this.iCouRepo.PostCourses(Id, couReq);
         }
 
        

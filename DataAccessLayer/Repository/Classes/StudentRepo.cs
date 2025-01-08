@@ -11,7 +11,7 @@ namespace DataAccessLayer.Repository.Classes
 	public class StudentRepo : IStudentRepo
 	{
 		private readonly GitstudentContext dbContext;
-        public string ConnectionString { get; set; }
+    
 
 		private int retunVal;
 		public StudentRepo(GitstudentContext dbContext)
@@ -21,9 +21,9 @@ namespace DataAccessLayer.Repository.Classes
 
 
 
-		public async Task<List<StudentPersonal>> GetStudents(string  constr)
+		public async Task<List<StudentPersonal>> GetStudents()
 		{
-			Initalize(constr);
+		
 			if (dbContext.StudentPersonals == null)  //Check Student Null
 			{
 				throw new Exception("Not Found");
@@ -38,11 +38,11 @@ namespace DataAccessLayer.Repository.Classes
 			//	return await dbContext.StudentPersonals.ToListAsync();
 		}
 
-		public async Task<List<StudentPersonal>> GetStudents(string constr, Guid Id)
+		public async Task<List<StudentPersonal>> GetStudents(Guid Id)
 		{
 			try
 			{
-				Initalize(constr);
+			
 				var result = dbContext.StudentPersonals.Where(x => x.Uid == Id );
 				if (result.Any())
 				{
@@ -59,11 +59,11 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		public async Task<List<StudentPersonal>> GetStudents(string constr, string searchCriteria)
+		public async Task<List<StudentPersonal>> GetStudents(string searchCriteria)
 		{
 			try
 			{
-				Initalize(constr);
+			
 				//var result = dbContext.StudentPersonals.Where(x => x.Id == Id && x.StudentCode == StudentCode);
 
 				var paramSearchCri = new SqlParameter("@SeachCriteria",searchCriteria );
@@ -87,14 +87,11 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		private void Initalize(string constr)
-		{
-			this.dbContext.ConnectionString = constr;
-		}
 
-		public async Task<int> PostStudents(StudentRequest StuRequest, string constr)
+
+		public async Task<int> PostStudents(StudentRequest StuRequest)
 		{
-			Initalize(constr);
+		
 			using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))  //Begin transaction
 			{
 				try
@@ -157,10 +154,10 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		public async Task<int> PostStudents(Guid Id, StudentRequest StuRequest, string constr)
+		public async Task<int> PostStudents(Guid Id, StudentRequest StuRequest)
 		{
 
-			Initalize(constr);
+		
 			using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))  //Begin transaction
 			{
 				try
@@ -194,11 +191,11 @@ namespace DataAccessLayer.Repository.Classes
 			}
 		}
 
-		public async Task<int> DeleteStudent(Guid Id, string constr)
+		public async Task<int> DeleteStudent(Guid Id)
 		{
 			try
 			{
-				Initalize(constr);
+			
 				var stu = await dbContext.StudentPersonals.FindAsync(Id);
 			
 				dbContext.StudentPersonals.Remove(stu);  //Remove the student 

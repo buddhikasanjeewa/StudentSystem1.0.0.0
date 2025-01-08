@@ -9,14 +9,14 @@ namespace DataAccessLayer.Repository.Interfaces
     {
 
     
-        public Task<List<StudentPersonal>> GetStudents(string constr);
-		public Task<List<StudentPersonal>> GetStudents(string constr, string searchCriteria);
+        public Task<List<StudentPersonal>> GetStudents();
+		public Task<List<StudentPersonal>> GetStudents(string searchCriteria);
 
-		public Task<List<StudentPersonal>> GetStudents(string constr, Guid Id);
+		public Task<List<StudentPersonal>> GetStudents(Guid Id);
 
-		public Task<int> PostStudents(StudentRequest StuRequest, string constr);
-		public Task<int> PostStudents(Guid Id,StudentRequest StuRequest, string constr);
-		public Task<int> DeleteStudent(Guid Id ,string constr);
+		public Task<int> PostStudents(StudentRequest StuRequest);
+		public Task<int> PostStudents(Guid Id,StudentRequest StuRequest);
+		public Task<int> DeleteStudent(Guid Id);
 
 	}
 }

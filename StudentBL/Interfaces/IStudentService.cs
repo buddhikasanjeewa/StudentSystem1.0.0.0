@@ -15,15 +15,15 @@ namespace StudentBL
 	{
 		////void GetStudentWithId(int id);
 
-		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString);
-		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, string SearchCriteria);
+		Task<List<StudentPersonal>> GetStudentsAsync();
+		Task<List<StudentPersonal>> GetStudentsAsync(string SearchCriteria);
 
-		Task<List<StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id);
-		Task<int> PostStudentAsync(StudentRequest stuRequest, string ConnectionString);
+		Task<List<StudentPersonal>> GetStudentsAsync(Guid Id);
+		Task<int> PostStudentAsync(StudentRequest stuRequest);
 
-		Task<int> PostStudentAsync(Guid Id, StudentRequest stuRequest, string ConnectionString);
+		Task<int> PostStudentAsync(Guid Id, StudentRequest stuRequest);
 
-		public Task<int> DeleteStudentAsync(Guid Id, string ConnectionString);
+		public Task<int> DeleteStudentAsync(Guid Id);
 
 
 

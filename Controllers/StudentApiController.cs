@@ -50,7 +50,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
         [HttpGet]
 		public async Task<IActionResult> GetStudents()
 		{
-			var data=await _stuService.GetStudentsAsync(MyOptions.ConnectionString);
+			var data=await _stuService.GetStudentsAsync();
 			return Ok(data);
 		}
 
@@ -60,7 +60,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			try
 			{
 
-				var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString, Id);
+				var data = await _stuService.GetStudentsAsync(Id);
 				if (data == null)
 				{
 					return NotFound();
@@ -79,7 +79,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			try
 			{
 				
-			   var data = await _stuService.GetStudentsAsync(MyOptions.ConnectionString,SearchCriteria);
+			   var data = await _stuService.GetStudentsAsync(SearchCriteria);
 				if (data == null)
 				{
 					return NotFound();
@@ -102,7 +102,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		{
 			try
 			{
-				rtnValue = await this._stuService.PostStudentAsync(StuRequest, MyOptions.ConnectionString);
+				rtnValue = await this._stuService.PostStudentAsync(StuRequest);
 				return Ok(rtnValue);
 			}
 			catch (Exception ex)
@@ -120,7 +120,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 				{
 					return BadRequest();
 				}
-				rtnValue = await this._stuService.PostStudentAsync(Id,StuRequest, MyOptions.ConnectionString);
+				rtnValue = await this._stuService.PostStudentAsync(Id,StuRequest);
 				if(rtnValue==0)
 				{
 					return BadRequest();
@@ -141,7 +141,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		{
 		   try
 			{
-				rtnValue= await this._stuService.DeleteStudentAsync(Id, MyOptions.ConnectionString);
+				rtnValue= await this._stuService.DeleteStudentAsync(Id);
 				if(rtnValue==0)
 				{
 					return NotFound();

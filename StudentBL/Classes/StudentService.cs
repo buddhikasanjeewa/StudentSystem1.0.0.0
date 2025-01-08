@@ -19,14 +19,14 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 			
 		}
 
-		public async Task<int> DeleteStudentAsync(Guid Id, string ConnectionString)
+		public async Task<int> DeleteStudentAsync(Guid Id)
 		{
-			return await this.iStuRepo.DeleteStudent(Id, ConnectionString);
+			return await this.iStuRepo.DeleteStudent(Id);
 		}
 
-		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString)
+		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync()
         {
-          var result=  await this.iStuRepo.GetStudents(ConnectionString);
+          var result=  await this.iStuRepo.GetStudents();
             List<StudentBL.Classes.StudentPersonal> stuList = new List<StudentBL.Classes.StudentPersonal>();     
             foreach (var item in result) {
                 var stuPer = new StudentBL.Classes.StudentPersonal()
@@ -48,9 +48,9 @@ namespace SoftOneStudentSystemWebApi.RequestModel
             return stuList;
         }
 
-		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, Guid Id)
+		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(Guid Id)
 		{
-			var result = await this.iStuRepo.GetStudents(ConnectionString, Id);
+			var result = await this.iStuRepo.GetStudents(Id);
 			List<StudentBL.Classes.StudentPersonal> stuList = new List<StudentBL.Classes.StudentPersonal>();
 			foreach (var item in result)
 			{
@@ -73,9 +73,9 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 			return stuList;
 		}
 
-		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string ConnectionString, string SearchCriteria)
+		public async Task<List<StudentBL.Classes.StudentPersonal>> GetStudentsAsync(string SearchCriteria)
 		{
-			var result = await this.iStuRepo.GetStudents(ConnectionString, SearchCriteria);
+			var result = await this.iStuRepo.GetStudents(SearchCriteria);
 			List<StudentBL.Classes.StudentPersonal> stuList = new List<StudentBL.Classes.StudentPersonal>();
 			foreach (var item in result)
 			{
@@ -99,7 +99,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 		}
 
 
-		public async Task<int> PostStudentAsync(StudentBL.RequestModel.StudentRequest stuRequest, string ConnectionString)
+		public async Task<int> PostStudentAsync(StudentBL.RequestModel.StudentRequest stuRequest)
         {
 			var stuReq = new DataAccessLayer.RequestModel.StudentRequest()
 			{
@@ -113,11 +113,11 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 				NIC = stuRequest.NIC,
 			};
 
-			return await this.iStuRepo.PostStudents(stuReq,ConnectionString);
+			return await this.iStuRepo.PostStudents(stuReq);
 
 		}
 
-		public async Task<int> PostStudentAsync(Guid Id, StudentBL.RequestModel.StudentRequest stuRequest, string ConnectionString)
+		public async Task<int> PostStudentAsync(Guid Id, StudentBL.RequestModel.StudentRequest stuRequest)
 		{
 			var stuReq = new DataAccessLayer.RequestModel.StudentRequest()
 			{
@@ -131,7 +131,7 @@ namespace SoftOneStudentSystemWebApi.RequestModel
 				NIC = stuRequest.NIC,
 			};
 
-			return await this.iStuRepo.PostStudents(Id,stuReq, ConnectionString);
+			return await this.iStuRepo.PostStudents(Id,stuReq);
 		}
 	}
 }

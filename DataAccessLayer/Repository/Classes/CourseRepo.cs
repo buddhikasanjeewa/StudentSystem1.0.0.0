@@ -8,10 +8,7 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
 {
     public class CourseRepo : ICourseRepo
     {
-        private void Initalize(string constr)
-        {
-            this.dbContext.ConnectionString = constr;
-        }
+     
 
 
         private readonly GitstudentContext dbContext;
@@ -22,12 +19,12 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
         {
             this.dbContext = dbContext;
         }
-        public async Task<int> DeleteCourses(Guid Id, string constr)
+        public async Task<int> DeleteCourses(Guid Id)
         {
 
             try
             {
-                Initalize(constr);
+              
                 var cou = await dbContext.Courses.FindAsync(Id);
 
                 dbContext.Courses.Remove(cou);  //Remove the student 
@@ -42,9 +39,9 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
             }
         }
 
-        public async Task<List<Course>> GetCourses(string constr)
+        public async Task<List<Course>> GetCourses()
         {
-            Initalize(constr);
+         
             if (dbContext.StudentPersonals == null)  //Check Student Null
             {
                 throw new Exception("Not Found");
@@ -60,9 +57,9 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
         }
 
 
-        public async Task<List<Course>> GetCourses(string constr, string searchCriteria)
+        public async Task<List<Course>> GetCourses(string searchCriteria)
         {
-            Initalize(constr); 
+          
             if (dbContext.StudentPersonals == null)  //Check Student Null
             {
                 throw new Exception("Not Found");
@@ -76,11 +73,11 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
             return courses;
         }
 
-        public async Task<List<Course>> GetCourses(string constr, Guid Id)
+        public async Task<List<Course>> GetCourses(Guid Id)
         {
             try
             {
-                Initalize(constr);
+               
                 var result = dbContext.Courses.Where(x => x.Uid == Id);
                 if (result.Any())
                 {
@@ -96,9 +93,9 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<int> PostCourses(CourseRequest CouRequest, string constr)
+        public async Task<int> PostCourses(CourseRequest CouRequest)
         {
-            Initalize(constr);
+       
             using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))  //Begin transaction
             {
                 try
@@ -132,10 +129,10 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Classes
             }
         }
 
-        public async Task<int> PostCourses(Guid Id, CourseRequest CouRequest, string constr)
+        public async Task<int> PostCourses(Guid Id, CourseRequest CouRequest)
         {
 
-            Initalize(constr);
+         
             using (var transaction = dbContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))  //Begin transaction
             {
                 try

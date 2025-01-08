@@ -7,14 +7,14 @@ namespace StudentSystemWebApi.StudentBL.Interfaces
     public interface ICourseService
     {
        
-        Task<List<Course>> GetCourseAsync(string ConnectionString, string SearchCriteria);
-        Task<List<Course>> GetCourseAsync(string ConnectionString);
+        Task<List<Course>> GetCourseAsync(string SearchCriteria);
+        Task<List<Course>> GetCourseAsync();
 
-       Task<List<Course>> GetCourseAsync(string ConnectionString, Guid Id);
-        Task<int> PostCourseAsync(CourseRequest couRequest, string ConnectionString);
+       Task<List<Course>> GetCourseAsync(Guid Id);
+        Task<int> PostCourseAsync(CourseRequest couRequest);
 
-        Task<int> PostCourseAsync(Guid Id, CourseRequest couRequest, string ConnectionString);
+        Task<int> PostCourseAsync(Guid Id, CourseRequest couRequest);
 
-        public Task<int> DeleteCourseAsync(Guid Id, string ConnectionString);
+        public Task<int> DeleteCourseAsync(Guid Id);
     }
 }

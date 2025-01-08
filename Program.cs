@@ -22,7 +22,7 @@ builder.Services.AddDbContext<GitstudentContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 builder.Services.AddScoped<IStudentService,StudentService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
-MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
+//MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
 
 //builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
 //option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
@@ -52,7 +52,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-public static class MyOptions
-{
-	public static string ConnectionString { get; set; }
-}
+//public static class MyOptions
+//{
+//	public static string ConnectionString { get; set; }
+//}

@@ -6,13 +6,13 @@ namespace StudentSystemWebApi.DataAccessLayer.Repository.Interfaces
     public interface ICourseRepo
     {
 
-        public Task<List<Course>> GetCourses(string constr);
-        public Task<List<Course>> GetCourses(string constr, string searchCriteria);
+        public Task<List<Course>> GetCourses();
+        public Task<List<Course>> GetCourses(string searchCriteria);
 
-        public Task<List<Course>> GetCourses(string constr, Guid Id);
+        public Task<List<Course>> GetCourses(Guid Id);
 
-        public Task<int> PostCourses(CourseRequest CouRequest, string constr);
-        public Task<int> PostCourses(Guid Id, CourseRequest CouRequest, string constr);
-        public Task<int> DeleteCourses(Guid Id, string constr);
+        public Task<int> PostCourses(CourseRequest CouRequest);
+        public Task<int> PostCourses(Guid Id, CourseRequest CouRequest);
+        public Task<int> DeleteCourses(Guid Id);
     }
 }

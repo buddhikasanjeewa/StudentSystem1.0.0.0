@@ -22,7 +22,7 @@ namespace StudentSystemWebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCourses()
         {
-            var data = await _couService.GetCourseAsync(MyOptions.ConnectionString);
+            var data = await _couService.GetCourseAsync();
             return Ok(data);
         }
 
@@ -32,7 +32,7 @@ namespace StudentSystemWebApi.Controllers
             try
             {
 
-                var data = await _couService.GetCourseAsync(MyOptions.ConnectionString, Id);
+                var data = await _couService.GetCourseAsync( Id);
                 if (data == null)
                 {
                     return NotFound();
@@ -51,7 +51,7 @@ namespace StudentSystemWebApi.Controllers
             try
             {
 
-                var data = await _couService.GetCourseAsync(MyOptions.ConnectionString, SearchCriteria);
+                var data = await _couService.GetCourseAsync(SearchCriteria);
                 if (data == null)
                 {
                     return NotFound();
@@ -70,7 +70,7 @@ namespace StudentSystemWebApi.Controllers
         {
             try
             {
-                rtnValue = await this._couService.PostCourseAsync(StuRequest, MyOptions.ConnectionString);
+                rtnValue = await this._couService.PostCourseAsync(StuRequest);
                 return Ok(rtnValue);
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace StudentSystemWebApi.Controllers
                 {
                     return BadRequest();
                 }
-                rtnValue = await this._couService.PostCourseAsync(Id, CouRequest, MyOptions.ConnectionString);
+                rtnValue = await this._couService.PostCourseAsync(Id, CouRequest);
                 if (rtnValue == 0)
                 {
                     return BadRequest();
@@ -107,7 +107,7 @@ namespace StudentSystemWebApi.Controllers
         {
             try
             {
-                rtnValue = await this._couService.DeleteCourseAsync(Id, MyOptions.ConnectionString);
+                rtnValue = await this._couService.DeleteCourseAsync(Id);
                 if (rtnValue == 0)
                 {
                     return NotFound();
