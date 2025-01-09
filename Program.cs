@@ -52,7 +52,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-//public static class MyOptions
-//{
-//	public static string ConnectionString { get; set; }
-//}

@@ -15,7 +15,7 @@ public partial class GitstudentContext : DbContext
         : base(options)
     {
     }
-    public string ConnectionString { get; set; }
+    
     public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
     public virtual DbSet<Course> Courses { get; set; }
