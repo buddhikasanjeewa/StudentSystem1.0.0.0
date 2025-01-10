@@ -5,9 +5,9 @@ namespace StudentSystemWebApi.DataAccessLayer.Models;
 
 public partial class ActivityLog
 {
-    public Guid TableUid { get; set; }
+    public Guid Uid { get; set; }
 
-    public int TableId { get; set; }
+    public Guid TableUid { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
@@ -20,4 +20,6 @@ public partial class ActivityLog
     public virtual User CreatedU { get; set; } = null!;
 
     public virtual User ModifiedU { get; set; } = null!;
+
+    public virtual Table TableU { get; set; } = null!;
 }

@@ -6,7 +6,6 @@ namespace StudentSystemWebApi.DataAccessLayer.Models;
 
 public partial class GitstudentContext : DbContext
 {
-
     public GitstudentContext()
     {
     }
@@ -15,7 +14,7 @@ public partial class GitstudentContext : DbContext
         : base(options)
     {
     }
-    
+
     public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
     public virtual DbSet<Course> Courses { get; set; }
@@ -25,6 +24,8 @@ public partial class GitstudentContext : DbContext
     public virtual DbSet<StudentCourse> StudentCourses { get; set; }
 
     public virtual DbSet<StudentPersonal> StudentPersonals { get; set; }
+
+    public virtual DbSet<Table> Tables { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -36,18 +37,17 @@ public partial class GitstudentContext : DbContext
     .Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("StuConStr"));
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActivityLog>(entity =>
         {
-            entity.HasKey(e => e.TableUid).HasName("PK_Log");
+            entity.HasKey(e => e.Uid).HasName("PK_Log");
 
             entity.ToTable("ActivityLog");
 
-            entity.Property(e => e.TableUid)
+            entity.Property(e => e.Uid)
                 .ValueGeneratedNever()
-                .HasColumnName("TableUID");
+                .HasColumnName("UID");
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("Created_Date");
@@ -56,6 +56,7 @@ public partial class GitstudentContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Modified_Date");
             entity.Property(e => e.ModifiedUid).HasColumnName("ModifiedUID");
+            entity.Property(e => e.TableUid).HasColumnName("TableUID");
 
             entity.HasOne(d => d.CreatedU).WithMany(p => p.ActivityLogCreatedUs)
                 .HasForeignKey(d => d.CreatedUid)
@@ -66,6 +67,11 @@ public partial class GitstudentContext : DbContext
                 .HasForeignKey(d => d.ModifiedUid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Log_Users1");
+
+            entity.HasOne(d => d.TableU).WithMany(p => p.ActivityLogs)
+                .HasForeignKey(d => d.TableUid)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ActivityLog_ActivityLog");
         });
 
         modelBuilder.Entity<Course>(entity =>
@@ -167,6 +173,22 @@ public partial class GitstudentContext : DbContext
             entity.Property(e => e.StudentCode)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Table>(entity =>
+        {
+            entity.HasKey(e => e.Uid);
+
+            entity.Property(e => e.Uid)
+                .ValueGeneratedNever()
+                .HasColumnName("UID");
+            entity.Property(e => e.TableDescription)
+                .HasMaxLength(250)
+                .IsUnicode(false)
+                .HasColumnName("Table_Description");
+            entity.Property(e => e.TableName)
+                .HasMaxLength(50)
+                .HasColumnName("Table_Name");
         });
 
         modelBuilder.Entity<User>(entity =>
