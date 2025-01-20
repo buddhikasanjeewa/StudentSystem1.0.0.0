@@ -30,13 +30,9 @@ public partial class GitstudentContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-    .AddJsonFile("appsettings.json")
-    .Build();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("StuConStr"));
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=LAPTOP-2OTFH16P\\SQLEXPRESS;Database=GITStudent;User Id=sa;password=123;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActivityLog>(entity =>
@@ -188,6 +184,7 @@ public partial class GitstudentContext : DbContext
                 .HasColumnName("Table_Description");
             entity.Property(e => e.TableName)
                 .HasMaxLength(50)
+                .IsUnicode(false)
                 .HasColumnName("Table_Name");
         });
 

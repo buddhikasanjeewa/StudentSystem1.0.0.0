@@ -7,7 +7,7 @@ public partial class Table
 {
     public Guid Uid { get; set; }
 
-    public byte[]? TableName { get; set; }
+    public string? TableName { get; set; }
 
     public string? TableDescription { get; set; }
 
