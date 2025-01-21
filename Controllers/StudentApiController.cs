@@ -51,6 +51,10 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		public async Task<IActionResult> GetStudents()
 		{
 			var data=await _stuService.GetStudentsAsync();
+			if (data.Count == 0)
+			{
+				return NoContent();
+			}
 			return Ok(data);
 		}
 
