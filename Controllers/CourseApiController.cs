@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StudentBL;
 using StudentSystemWebApi.DataAccessLayer.RequestModel;
 using StudentSystemWebApi.StudentBL.Interfaces;
 
@@ -14,6 +13,7 @@ namespace StudentSystemWebApi.Controllers
 
         private readonly ICourseService _couService;
         private int rtnValue;
+   
         public CourseApiController(ICourseService couService)
         {
             this._couService = couService;
@@ -22,55 +22,74 @@ namespace StudentSystemWebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCourses()
         {
-            var data = await _couService.GetCourseAsync();
-            return Ok(data);
+            try
+            {
+                var data = await _couService.GetCourseAsync();
+
+                if (data == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpGet("{Id:guid}")]
-        public async Task<IActionResult> GetCourses(Guid Id)
+        public async Task<IActionResult> GetCourses(Guid id)
         {
             try
             {
 
-                var data = await _couService.GetCourseAsync( Id);
+                var data = await _couService.GetCourseAsync(id);
+
                 if (data == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(data);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                throw new Exception(ex.Message);
             }
+        
         }
 
         [HttpGet("{SearchCriteria}")]
-        public async Task<IActionResult> GetCourses(string SearchCriteria)
+        public async Task<IActionResult> GetCourses(string searchCriteria)
         {
             try
             {
 
-                var data = await _couService.GetCourseAsync(SearchCriteria);
+                var data = await _couService.GetCourseAsync(searchCriteria);
+
                 if (data == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(data);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
         // POST api/<CourseApiController>
         [HttpPost]
-        public async Task<IActionResult> PostCourses([FromBody] CourseRequest StuRequest)
+        public async Task<IActionResult> PostCourses([FromBody] CourseRequest stuRequest)
         {
             try
             {
-                rtnValue = await this._couService.PostCourseAsync(StuRequest);
+                rtnValue = await this._couService.PostCourseAsync(stuRequest);
+
                 return Ok(rtnValue);
             }
             catch (Exception ex)
@@ -80,20 +99,23 @@ namespace StudentSystemWebApi.Controllers
         }
 
         // PUT api/<CourseApiController>/5
-        [HttpPut("{Id:guid}")]
-        public async Task<IActionResult> UpdateStude(Guid Id, CourseRequest CouRequest)
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateCourses(Guid id, CourseRequest couRequest)
         {
             try
             {
-                if (Id != CouRequest.Id)
+                if (id != couRequest.Id)
                 {
                     return BadRequest();
                 }
-                rtnValue = await this._couService.PostCourseAsync(Id, CouRequest);
+
+                rtnValue = await this._couService.PostCourseAsync(id, couRequest);
+
                 if (rtnValue == 0)
                 {
                     return BadRequest();
                 }
+
                 return Ok(rtnValue);
             }
             catch (Exception ex)
@@ -102,16 +124,18 @@ namespace StudentSystemWebApi.Controllers
             }
 
         }
-        [HttpDelete("{Id:guid}")]
-        public async Task<ActionResult> DeleteCourses(Guid Id)
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteCourses(Guid id)
         {
             try
             {
-                rtnValue = await this._couService.DeleteCourseAsync(Id);
+                rtnValue = await this._couService.DeleteCourseAsync(id);
+
                 if (rtnValue == 0)
                 {
                     return NotFound();
                 }
+
                 return Ok(rtnValue);
             }
             catch (Exception ex)
