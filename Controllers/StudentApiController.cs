@@ -1,16 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Diagnostics;
-
 using Microsoft.AspNetCore.Mvc;
-
 using StudentBL;
-
-using StudentBL.RequestModel;
 using StudentSystemWebApi.Classes;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using StudentBL.RequestModel;
 
-
-namespace SoftOneStudentSystemWebApi.Controllers
+namespace StudentSystemWebApi.Controllers
 {
 
 	/*
@@ -25,50 +20,55 @@ namespace SoftOneStudentSystemWebApi.Controllers
 	public class StudentApiController : ControllerBase
 	{
 
-		//private readonly IStudentService _stuService;
 		private readonly IStudentService _stuService;
 		private  int rtnValue;
 
 		#region Dependancy Injection
 		public StudentApiController(IStudentService  stuService)  //Add DbContext Via Dependancy Injection
-        {
-			
+        {		
 			this._stuService = stuService;
-			
-
-			//this._stuService = new StudentService(new StudentRepo(this.dbContext));
-
-
 		}
-   
-
         #endregion
-
-
 
         #region Get Data
         [HttpGet]
 		public async Task<IActionResult> GetStudents()
 		{
-			var data=await _stuService.GetStudentsAsync();
-			if (data.Count == 0)
-			{
-				return NoContent();
-			}
-			return Ok(data);
-		}
-
-		[HttpGet("{Id:guid}")]
-		public async Task<IActionResult> GetStudents(Guid Id)
-		{
 			try
 			{
+				var data = await _stuService.GetStudentsAsync();
 
-				var data = await _stuService.GetStudentsAsync(Id);
 				if (data == null)
 				{
 					return NotFound();
 				}
+
+				if (data.Count == 0)
+				{
+					return NoContent();
+				}
+
+				return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+		[HttpGet("{id:guid}")]
+		public async Task<IActionResult> GetStudents(Guid id)
+		{
+			try
+			{
+
+				var data = await _stuService.GetStudentsAsync(id);
+
+				if (data == null)
+				{
+					return NotFound();
+				}
+
 				return Ok(data);
 			}
 			catch (Exception ex)
@@ -77,17 +77,19 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			}
 		}
 
-		[HttpGet("{SearchCriteria}")]
-		public async Task<IActionResult> GetStudents(string SearchCriteria)
+		[HttpGet("{searchCriteria}")]
+		public async Task<IActionResult> GetStudents(string searchCriteria)
 		{
 			try
 			{
 				
-			   var data = await _stuService.GetStudentsAsync(SearchCriteria);
+			   var data = await _stuService.GetStudentsAsync(searchCriteria);
+
 				if (data == null)
 				{
 					return NotFound();
 				}
+
 				return Ok(data);
 			}
 			catch (Exception ex)
@@ -102,11 +104,11 @@ namespace SoftOneStudentSystemWebApi.Controllers
 
 		[HttpPost]      //Insert Student 
 		
-		public async Task<IActionResult> PostStudent(StudentRequest StuRequest)
+		public async Task<IActionResult> PostStudent(StudentRequest stuRequest)
 		{
 			try
 			{
-				rtnValue = await this._stuService.PostStudentAsync(StuRequest);
+				rtnValue = await this._stuService.PostStudentAsync(stuRequest);
 				return Ok(rtnValue);
 			}
 			catch (Exception ex)
@@ -115,20 +117,23 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			}
 
 		}
-		[HttpPut("{Id:guid}")]
-		public async Task<IActionResult> UpdateStudent(Guid Id, StudentRequest StuRequest)
+		[HttpPut("{id:guid}")]
+		public async Task<IActionResult> UpdateStudent(Guid id, StudentRequest stuRequest)
 		{
 			try
 			{
-				if (Id != StuRequest.Id)
+				if (id != stuRequest.Id)
 				{
 					return BadRequest();
 				}
-				rtnValue = await this._stuService.PostStudentAsync(Id,StuRequest);
+
+				rtnValue = await this._stuService.PostStudentAsync(id,stuRequest);
+
 				if(rtnValue==0)
 				{
 					return BadRequest();
 				}
+
 				return Ok(rtnValue);
 			}
 			catch (Exception ex)
@@ -137,19 +142,20 @@ namespace SoftOneStudentSystemWebApi.Controllers
 			}
 
 		}
-
 		#endregion
 		#region Delete Student
-		[HttpDelete("{Id:guid}")]
-		public async Task<ActionResult> DeleteStudent(Guid Id)
+		[HttpDelete("{id:guid}")]
+		public async Task<ActionResult> DeleteStudent(Guid id)
 		{
 		   try
 			{
-				rtnValue= await this._stuService.DeleteStudentAsync(Id);
+				rtnValue= await this._stuService.DeleteStudentAsync(id);
+
 				if(rtnValue==0)
 				{
 					return NotFound();
 				}
+
 				return Ok(rtnValue);
 			}
 	    	catch(Exception ex) {
@@ -158,7 +164,7 @@ namespace SoftOneStudentSystemWebApi.Controllers
 		}
 		#endregion
 
-			#region ErrorHandl
+		#region ErrorHandle
 		[ApiExplorerSettings(IgnoreApi = true)]
 		[Route("/error-development")]
 		public IActionResult HandleErrorDevelopment(
