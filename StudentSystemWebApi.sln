@@ -6,7 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentSystemWebApi", "Stud
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentXunitTest", "..\StudentXunitTest\StudentXunitTest.csproj", "{6790ABAD-7D7F-4A82-B8B3-F99FC66E65A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{59370FB8-5146-44EF-A1FC-9EBF28C5B5EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\Common\Common.csproj", "{59370FB8-5146-44EF-A1FC-9EBF28C5B5EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "..\TestConsoleApp\TestConsoleApp.csproj", "{1977676E-E79E-4010-A2D2-785CDD343F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{59370FB8-5146-44EF-A1FC-9EBF28C5B5EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59370FB8-5146-44EF-A1FC-9EBF28C5B5EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59370FB8-5146-44EF-A1FC-9EBF28C5B5EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1977676E-E79E-4010-A2D2-785CDD343F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1977676E-E79E-4010-A2D2-785CDD343F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1977676E-E79E-4010-A2D2-785CDD343F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1977676E-E79E-4010-A2D2-785CDD343F0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
