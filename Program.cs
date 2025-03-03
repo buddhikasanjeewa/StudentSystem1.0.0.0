@@ -22,6 +22,7 @@ builder.Services.AddDbContext<GitstudentContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("StuConStr")));
 builder.Services.AddScoped<IStudentService,StudentService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<ICourseTypeService, CourseTypeService>();
 //MyOptions.ConnectionString = builder.Configuration.GetConnectionString("StuConStr");
 
 //builder.Services.AddDbContext<SoftoneStudentSystemContext>(option =>
