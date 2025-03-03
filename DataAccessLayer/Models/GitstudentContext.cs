@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Security.Cryptography;
-using System.Text;
-using Common.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace StudentSystemWebApi.DataAccessLayer.Models;
 
 public partial class GitstudentContext : DbContext
 {
-
-
     public GitstudentContext()
     {
-    
     }
 
     public GitstudentContext(DbContextOptions<GitstudentContext> options)
@@ -36,23 +29,9 @@ public partial class GitstudentContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-        var conStr = EncryptionHelper.Decrypt(configuration.GetConnectionString("StuConStr"));
-        optionsBuilder.UseSqlServer(conStr);
-        //byte[] encrytedString = Encoding.ASCII.GetBytes(conntring);
-
-
-        //optionsBuilder.UseSqlServer(configuration.GetConnectionString("StuConStr"));
-    }
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=LAPTOP-2OTFH16P\\SQLEXPRESS;Database=GITStudent;User Id=sa;password=123;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=LAPTOP-2OTFH16P\\SQLEXPRESS;Database=GITStudent;User Id=sa;password=123;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -124,13 +103,16 @@ public partial class GitstudentContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("UId");
             entity.Property(e => e.CourseTypeDescription)
-                .HasMaxLength(250)
                 .IsUnicode(false)
                 .HasColumnName("Course_Type_Description");
             entity.Property(e => e.CourseTypeId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("Course_Type_Id");
+            entity.Property(e => e.CourseTypeName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Course_Type_Name");
         });
 
         modelBuilder.Entity<StudentCourse>(entity =>

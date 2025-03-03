@@ -7,6 +7,8 @@ public partial class CourseType
 {
     public Guid Uid { get; set; }
 
+    public string? CourseTypeName { get; set; }
+
     public string CourseTypeId { get; set; } = null!;
 
     public string CourseTypeDescription { get; set; } = null!;
