@@ -7,5 +7,7 @@
         public string CourseTypeId { get; set; } = null!;
 
         public string CourseTypeDescription { get; set; } = null!;
+
+        public string CourseTypeName { get; set; } = null!;
     }
 }

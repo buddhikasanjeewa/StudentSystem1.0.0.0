@@ -33,6 +33,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
                 {
                     Uid= item.Uid,
                     CourseTypeDescription = item.CourseTypeDescription,
+                    CourseTypeName = item.CourseTypeName,
                     CourseTypeId =item.CourseTypeId
 
                     
@@ -55,6 +56,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
                 {
                     Uid = item.Uid,
                     CourseTypeDescription = item.CourseTypeDescription,
+                    CourseTypeName = item.CourseTypeName,
                     CourseTypeId = item.CourseTypeId
 
                 };
@@ -89,7 +91,8 @@ namespace StudentSystemWebApi.StudentBL.Classes
             {
                 Uid= couRequest.Uid,
                 CourseTypeId= couRequest.CourseTypeId,
-                CourseTypeDescription=couRequest.CourseTypeDescription
+                CourseTypeName = couRequest.CourseTypeName,
+                CourseTypeDescription =couRequest.CourseTypeDescription
               
          
             };
@@ -103,6 +106,7 @@ namespace StudentSystemWebApi.StudentBL.Classes
             {
                 Uid = couRequest.Uid,
                 CourseTypeId = couRequest.CourseTypeId,
+                CourseTypeName = couRequest.CourseTypeName,
                 CourseTypeDescription = couRequest.CourseTypeDescription
             };
 
